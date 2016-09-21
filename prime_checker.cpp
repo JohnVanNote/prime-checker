@@ -20,6 +20,7 @@ int gcd(unsigned int a, unsigned int b);
 unsigned long long int int_pow(int a, int x);
 
 int main(int argc, char *argv[]) {
+
         if(argc > 2) {
                 cerr << "Too many arguments" << endl;
                 return 1;
@@ -61,6 +62,7 @@ bool isPrime(int n) {
         if((n == 2) || (n == 3)) {
                 return true;
         }
+      
         /* easy way to cut iterations on evens */
         if((n%2) == 0) {
                 return false;
@@ -72,24 +74,11 @@ bool isPrime(int n) {
                 /* find a, a random int in the rand [2, n-2] */
                 int a = (rand() % (n-3)) + 2;
                 cout << "A: " << a << " N: " << n << endl ;
-                if(gcd(a,n) != 1)
-                {
-                        //cout << "Here" << endl;
-                        //primality = false;
-                }
-                else if(fermats_little(a,n) != 1)
-                {
-                        //cout << "there" << endl;
-                        //return false;
-                }
-                else 
-                {
-                        //cout << "Everywhere" << endl;
+                if((gcd(a, n) == 1) && (fermats_little(a, n) == 1)) {
                         primality = true;
                 }
                 iterations++;
         }
-
         return primality;
 }
 
