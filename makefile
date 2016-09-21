@@ -22,9 +22,8 @@ run : output
 	$(out)
 
 test : output
-	$(out) 3
 	num=1; \
-	while [[ $$num -le 10 ]]; do \
+	while [[ $$num -le 100 ]]; do \
 	$(out) $$num; \
 	(( num = num + 1 ));\
 	done
