@@ -4,9 +4,9 @@
  * simply checks if a number is prime or not
  * working algorithm
  *
- * created by john van note
- * created on 9/16/13
- * last update: 9/19/13
+ * created by John Van Note
+ * created on 2013-09-16
+ * last update: 2016-09-20
  */
 
 #include <iostream>
@@ -15,29 +15,38 @@ using namespace std;
 
 /* prototypes, details in definition below */
 bool isPrime(int n);
-int fermats_little(int a, int p);
+unsigned long int fermats_little(int a, int p);
 int gcd(unsigned int a, unsigned int b);
 unsigned long long int int_pow(int a, int x);
 
-int main(void) {
-	/* gets the value from the user */
-	int value;
-	cout << "Enter a value: ";
-  cin >> value;
+int main(int argc, char *argv[]) {
+        if(argc > 2) {
+                cerr << "Too many arguments" << endl;
+                return 1;
+        }
 
-	/* prime numbers are greater than 1 by definition */
-	if(value<2) {
-		cout << value << " is Not a prime number.";
-	}
-	else if(isPrime(value)) {
-		cout << value << " is a prime number.";
-	}
-	else {
-		cout << value << " is Not a prime number.";
-	}
-	cout << endl;
+        int value;
+        string strPrime;
 
-	return 0;
+        /* takes argument or gets user input */
+        if(argc == 2) {
+                value = stoi(argv[1]);
+        }
+        else {
+                cout << "Enter a value: ";
+                cin >> value;
+        }
+        /* prime numbers are greater than 1 by definition */
+        if((value<2) || !isPrime(value)) { 
+                strPrime = " NOT ";
+        }
+        else {
+                strPrime = " ";
+        }
+
+        cout << value << " is" + strPrime + "a prime number." << endl;
+
+        return 0;
 }
 
 /*
@@ -48,40 +57,40 @@ int main(void) {
  * accuracy)
  */
 bool isPrime(int n) {
-  /* special cases */
-	if((n == 2) || (n == 3)) {
-		return true;
-	}
-	/* easy way to cut iterations on evens */
-  if((n%2) == 0) {
-		return false;
-	}
+        /* special cases */
+        if((n == 2) || (n == 3)) {
+                return true;
+        }
+        /* easy way to cut iterations on evens */
+        if((n%2) == 0) {
+                return false;
+        }
 
-	int iterations = 0;
-	bool primality = false;
-	while((iterations < 20) && (primality != true)) {
-		/* find a, a random int in the rand [2, n-2] */
-		int a = (rand() % (n-3)) + 2;
-		cout << "A: " << a << " N: " << n << endl ;
-		if(gcd(a,n) != 1)
-		{
-			cout << "Here" << endl;
-			//primality = false;
-		}
-		else if(fermats_little(a,n) != 1)
-		{
-			cout << "there" << endl;
-			//return false;
-		}
-		else 
-		{
-			cout << "Everywhere" << endl;
-			primality = true;
-		}
-		iterations++;
-	}
+        int iterations = 0;
+        bool primality = false;
+        while((iterations < 20) && (primality != true)) {
+                /* find a, a random int in the rand [2, n-2] */
+                int a = (rand() % (n-3)) + 2;
+                cout << "A: " << a << " N: " << n << endl ;
+                if(gcd(a,n) != 1)
+                {
+                        //cout << "Here" << endl;
+                        //primality = false;
+                }
+                else if(fermats_little(a,n) != 1)
+                {
+                        //cout << "there" << endl;
+                        //return false;
+                }
+                else 
+                {
+                        //cout << "Everywhere" << endl;
+                        primality = true;
+                }
+                iterations++;
+        }
 
-	return primality;
+        return primality;
 }
 
 /*
@@ -90,11 +99,11 @@ bool isPrime(int n) {
  * @param p: the "prime" number in question
  * @return: a^(p-1) mod p
  */
-int fermats_little(int a, int p) {
-	unsigned long long int power = int_pow(a, p-1);
-	int remainder = power % p;
-	cout << "Remainder: " << remainder << endl;
-	return remainder;
+unsigned long int fermats_little(int a, int p) {
+        unsigned long long int power = int_pow(a, p-1);
+        unsigned long int remainder = power % p;
+        cout << "Remainder: " << remainder << endl;
+        return remainder;
 }
 
 /* 
@@ -104,14 +113,14 @@ int fermats_little(int a, int p) {
  * @return: the GCD
  */
 int gcd(unsigned int a, unsigned int b) {
-	unsigned int temp;
-	while(b != 0) {
-		temp = a % b;
-		a = b;
-		b = temp;
-	}
-	cout << "GCD: " << a << endl;
-	return a;
+        unsigned int temp;
+        while(b != 0) {
+                temp = a % b;
+                a = b;
+                b = temp;
+        }
+        cout << "GCD: " << a << endl;
+        return a;
 }
 
 /*
@@ -121,12 +130,12 @@ int gcd(unsigned int a, unsigned int b) {
  * @return: a^x
  */
 unsigned long long int int_pow(int a, int x) {
-	if(x == 0)
-		return 1;
-	unsigned long long int solution = 1;
-	for(int i=0; i<x; i++) {
-		solution = solution * a;
-	}
-	cout << "Solution: " << solution << endl;
-	return solution;
+        if(x == 0)
+                return 1;
+        unsigned long long int solution = 1;
+        for(int i=0; i<x; i++) {
+                solution = solution * a;
+        }
+        cout << "Solution: " << solution << endl;
+        return solution;
 }
