@@ -72,7 +72,9 @@ bool isPrime(int n) {
         bool primality = false;
         while((iterations < 20) && (primality != true)) {
                 /* find a, a random int in the rand [2, n-2] */
-                int a = (rand() % (n-3)) + 2;
+                srand(time(NULL) + iterations);
+                int random = rand();
+                int a = (random % (n-3)) + 2;
                 cout << "A: " << a << " N: " << n << endl ;
                 if((gcd(a, n) == 1) && (fermats_little(a, n) == 1)) {
                         primality = true;
