@@ -69,15 +69,18 @@ bool isPrime(int n) {
         }
 
         int iterations = 0;
-        bool primality = false;
-        while((iterations < 20) && (primality != true)) {
+        bool primality = true;
+        while((iterations < 20) && (primality != false)) {
                 /* find a, a random int in the rand [2, n-2] */
                 srand(time(NULL) + iterations);
                 int random = rand();
                 int a = (random % (n-3)) + 2;
-                cout << "A: " << a << " N: " << n << endl ;
-                if((gcd(a, n) == 1) && (fermats_little(a, n) == 1)) {
-                        primality = true;
+                //cout << "A: " << a << " N: " << n << endl ;
+                if(!(gcd(a, n) == 1)) { 
+                        primality = false;
+                }
+                if (!(fermats_little(a, n) == a)) {
+                        primality = false;
                 }
                 iterations++;
         }
@@ -88,12 +91,12 @@ bool isPrime(int n) {
  * fermats_little: calculates a^(p-1) mod p
  * @param a: a is the random number in the range [2, p-1]
  * @param p: the "prime" number in question
- * @return: a^(p-1) mod p
+ * @return: a^(p) mod p
  */
 unsigned long int fermats_little(int a, int p) {
-        unsigned long long int power = int_pow(a, p-1);
+        unsigned long long int power = int_pow(a, p);
         unsigned long int remainder = power % p;
-        cout << "Remainder: " << remainder << endl;
+        //cout << "Remainder: " << remainder << endl;
         return remainder;
 }
 
@@ -110,7 +113,7 @@ int gcd(unsigned int a, unsigned int b) {
                 a = b;
                 b = temp;
         }
-        cout << "GCD: " << a << endl;
+        //cout << "GCD: " << a << endl;
         return a;
 }
 
@@ -127,6 +130,6 @@ unsigned long long int int_pow(int a, int x) {
         for(int i=0; i<x; i++) {
                 solution = solution * a;
         }
-        cout << "Solution: " << solution << endl;
+        //cout << "Solution: " << solution << endl;
         return solution;
 }
