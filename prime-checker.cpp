@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <cmath>
 using namespace std;
 
 /* prototypes, details in definition below */
@@ -133,13 +134,14 @@ unsigned long long int gcd(unsigned long long int a, unsigned long long int b) {
  * @return: a^x
  */
 unsigned long long int int_pow(unsigned long long int a, unsigned long long int x) {
-        if(x == 0)
+        /*if(x == 0)
                 return 1;
         uint64_t solution = 1;
         for(unsigned long long int i=0; i<x; i++) {
                 solution = solution * a;
                 cout << "\tsolution: " << solution << endl;
-        }
+        }*/
+        unsigned long long int solution = pow(2,2);
         cout << "Solution: " << solution << endl;
         return solution;
 }
