@@ -8,7 +8,7 @@
 # makefile for the prime_checker.cpp program
 #
 
-objects=./prime_checker.cpp
+objects=./prime-checker.cpp
 out=./pcoutput.out
 CC=g++
 
