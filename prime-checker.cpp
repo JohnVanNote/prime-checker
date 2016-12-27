@@ -6,7 +6,6 @@
  *
  * created by John Van Note
  * created on 2013-09-16
- * last update: 2016-09-20
  */
 
 #include <iostream>
@@ -71,7 +70,7 @@ bool isPrime(unsigned long int n) {
 
         int iterations = 0;
         bool primality = true;
-        int iter_max = 1;
+        int iter_max = 20;
 
         while((iterations < iter_max) && (primality == true)) {
                 cout << "iter: " << iterations << " prime: " << primality << endl;
@@ -80,8 +79,6 @@ bool isPrime(unsigned long int n) {
                 srand(time(NULL) + iterations);
                 unsigned long long int random = rand();
                 unsigned long long int a = (random % (n-3)) + 2;
-                /* temp */
-                a = 11;
                 
                 cout << "A: " << a << " N: " << n << endl ;
                 
@@ -104,10 +101,9 @@ bool isPrime(unsigned long int n) {
  * @return: a^(p-1) mod p
  */
 bool fermats_little(unsigned long long int a, unsigned long long int p) {
-        unsigned long long int atop= int_pow(a, p);
-        //unsigned long long int remainder = power % p;
-        //cout << "Remainder: " << remainder << endl;
-        return !((atop % p) == a);
+        unsigned long long int a_to_p= int_pow(a, p);
+        cout << "a^p " << a_to_p << endl;
+        return !((a_to_p % p) == a);
 }
 
 /* 
@@ -133,15 +129,7 @@ unsigned long long int gcd(unsigned long long int a, unsigned long long int b) {
  * @param x: exponent
  * @return: a^x
  */
-unsigned long long int int_pow(unsigned long long int a, unsigned long long int x) {
-        /*if(x == 0)
-                return 1;
-        uint64_t solution = 1;
-        for(unsigned long long int i=0; i<x; i++) {
-                solution = solution * a;
-                cout << "\tsolution: " << solution << endl;
-        }*/
-        unsigned long long int solution = pow(2,2);
-        cout << "Solution: " << solution << endl;
+unsigned long long int int_pow(unsigned long long int a, unsigned long long int x) { 
+        unsigned long long int solution = pow(a,x);
         return solution;
 }

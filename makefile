@@ -1,9 +1,7 @@
-#
-#
 # makefile
 #
-# created by John Van Note
-# Updated on 2016-09-20
+# John Van Note
+# 2016-09-20
 #
 # makefile for the prime_checker.cpp program
 #
